@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Configuration\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SenseHome.Services\SenseHome.Services.csproj">

@@ -8,7 +8,7 @@ namespace SenseHome.API.Configuration
 {
     public static class ExceptionHandlerConfiguration
     {
-        public static void UseIotHubExceptionHandler(this IApplicationBuilder app, bool isDev)
+        public static void UseSenseHomeExceptionHandler(this IApplicationBuilder app, bool isDev)
         {
             app.UseExceptionHandler(option =>
             {
