@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="User\" />
+    <Folder Include="Base\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SenseHome.DomainModels\SenseHome.DomainModels.csproj" />
+    <ProjectReference Include="..\SenseHome.DB\SenseHome.DB.csproj" />
+    <ProjectReference Include="..\SenseHome.Common\SenseHome.Common.csproj" />
   </ItemGroup>
 </Project>

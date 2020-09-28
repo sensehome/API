@@ -4,4 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="User\" />
+    <Folder Include="Mapper\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SenseHome.DataTransferObjects\SenseHome.DataTransferObjects.csproj" />
+    <ProjectReference Include="..\SenseHome.DomainModels\SenseHome.DomainModels.csproj" />
+    <ProjectReference Include="..\SenseHome.Repositories\SenseHome.Repositories.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+  </ItemGroup>
 </Project>
