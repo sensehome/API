@@ -3,11 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\SenseHome.Services\SenseHome.Services.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>

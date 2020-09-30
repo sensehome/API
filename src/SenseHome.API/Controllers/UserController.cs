@@ -7,6 +7,7 @@ using SenseHome.Services.User;
 
 namespace SenseHome.API.Controllers
 {
+    [Route("api/users")]
     public class UserController : SenseHomeBaseController
     {
         private readonly IUserService userService;

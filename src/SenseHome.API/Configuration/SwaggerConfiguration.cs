@@ -31,7 +31,7 @@ namespace SenseHome.API.Configuration
             });
         }
 
-        public static void AddSwaggerMiddleware(this IApplicationBuilder app)
+        public static void UseSwaggerMiddleware(this IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
