@@ -1,10 +1,15 @@
 ﻿using System;
+using SenseHome.Common.Enums;
+using SenseHome.DataTransferObjects.Base;
+
 namespace SenseHome.DataTransferObjects.User
 {
-    public class UserDto
+    public class UserDto : BaseDtoWithLog
     {
-        public UserDto()
-        {
-        }
+        public string Name { get; set; }
+        public UserType Type { get; set; }
+        public bool IsActive { get; set; } = true;
+        public bool IsConnected { get; set; } = false;
+        public DateTime LastConnected { get; set; } = DateTime.MinValue;
     }
 }
