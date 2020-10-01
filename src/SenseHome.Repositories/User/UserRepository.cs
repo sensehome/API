@@ -13,7 +13,7 @@ namespace SenseHome.Repositories.User
         private readonly IMongoCollection<DomainModels.User> collection;
         public UserRepository(MongoDBContext mongoDbContext)
         {
-            collection = mongoDbContext.Database.GetCollection<DomainModels.User>("user");
+            collection = mongoDbContext.Database.GetCollection<DomainModels.User>("users");
         }
 
         public async Task<bool> AddLog(string id, DateTime dateTime)
