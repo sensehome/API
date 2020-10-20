@@ -9,7 +9,6 @@ namespace SenseHome.DataTransferObjects.User
         public string Name { get; set; }
         public UserType Type { get; set; }
         public bool IsActive { get; set; } = true;
-        public bool IsConnected { get; set; } = false;
         public DateTime LastConnected { get; set; } = DateTime.MinValue;
     }
 }

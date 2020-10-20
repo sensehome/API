@@ -23,7 +23,7 @@ namespace SenseHome.Services.User
             return await userRepository.AddLog(id, DateTime.Now);
         }
 
-        public async Task<UserDto> CreateUserAsync(UserUpsertDto userDto)
+        public async Task<UserDto> CreateUserAsync(UserInsertDto userDto)
         {
             var userToCreate = mapper.Map<DomainModels.User>(userDto);
             var createdUser = await userRepository.CreateAsync(userToCreate);
@@ -41,14 +41,7 @@ namespace SenseHome.Services.User
             return mapper.Map<IEnumerable<UserDto>>(users);
         }
 
-        public IEnumerable<UserDto> GetConnectedUsers()
-        {
-            var queryable = userRepository.GetAsQueryable();
-            var users = queryable.Where(u => u.IsConnected);
-            return mapper.Map<IEnumerable<UserDto>>(users);
-        }
-
-        public Task<UserDto> GetUserAsync(string id)
+        public Task<UserDto> GetUserByIdAsync(string id)
         {
             throw new NotImplementedException();
         }

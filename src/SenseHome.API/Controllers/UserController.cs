@@ -24,7 +24,7 @@ namespace SenseHome.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDto>> CreateAsync([FromBody] UserUpsertDto user)
+        public async Task<ActionResult<UserDto>> CreateAsync([FromBody] UserInsertDto user)
         {
             var createdUser = await userService.CreateUserAsync(user);
             return Created("", createdUser);
