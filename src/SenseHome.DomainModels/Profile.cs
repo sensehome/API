@@ -1,4 +1,4 @@
-﻿using SenseHome.DomainModels.Base
+﻿using SenseHome.DomainModels.Base;
 
 namespace SenseHome.DomainModels
 {

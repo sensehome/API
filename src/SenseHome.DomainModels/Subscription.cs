@@ -5,10 +5,11 @@ namespace SenseHome.DomainModels
 {
     public class Subscription : BaseEntity
     {
+        private DateTime _CreatedDate;
         public DateTime CreatedDate
         {
-            get { return createdDate; }
-            private set { createdDate = DateTime.Now; }
+            get { return _CreatedDate; }
+            private set { _CreatedDate = DateTime.Now; }
         }
         public DateTime ExpireDate { get; set; }
         public string[] Path { set; get; }

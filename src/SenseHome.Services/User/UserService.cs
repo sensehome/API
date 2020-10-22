@@ -46,11 +46,13 @@ namespace SenseHome.Services.User
             throw new NotImplementedException();
         }
 
-        public async Task<UserDto> UpdateAsync(UserUpsertDto user)
+        public async Task<UserDto> UpdateAsync(UserUpdateDto user)
         {
             var userToUpdate = mapper.Map<DomainModels.User>(user);
             var updatedUser = await userRepository.UpdateAsync(userToUpdate);
             return mapper.Map<UserDto>(updatedUser);
         }
+
+
     }
 }
