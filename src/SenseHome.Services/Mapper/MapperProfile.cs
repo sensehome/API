@@ -1,4 +1,5 @@
 ﻿using SenseHome.DataTransferObjects.User;
+using SenseHome.DataTransferObjects.Profile;
 
 namespace SenseHome.Services.Mapper
 {
@@ -20,7 +21,8 @@ namespace SenseHome.Services.Mapper
 
         private void CreateProfileMaps()
         {
-
+            CreateMap<DomainModels.Profile, ProfileDto>();
+            CreateMap<ProfileUpsertDto, DomainModels.Profile>();
         }
 
         private void CreateSubscriptionMaps()

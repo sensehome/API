@@ -6,10 +6,10 @@ namespace SenseHome.Services.User
 {
     public interface IUserService
     {
-        Task<UserDto> CreateUserAsync(UserUpsertDto user);
+        Task<UserDto> CreateUserAsync(UserInsertDto user);
         Task<UserDto> GetUserByIdAsync(string id);
         Task<IEnumerable<UserDto>> GetAllAsync();
-        Task<UserDto> UpdateAsync(UserInsertDto user);
+        Task<UserDto> UpdateAsync(UserUpdateDto user);
         Task<bool> DeleteAsync(string id);
         Task<bool> AddLog(string id);
     }

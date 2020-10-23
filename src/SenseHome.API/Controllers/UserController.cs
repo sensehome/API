@@ -20,7 +20,7 @@ namespace SenseHome.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetAsync([FromRoute] string id)
         {
-            return await userService.GetUserAsync(id);
+            return await userService.GetUserByIdAsync(id);
         }
 
         [HttpPost]
