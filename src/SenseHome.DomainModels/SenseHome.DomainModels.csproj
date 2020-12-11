@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SenseHome.DB" Version="1.0.1" />
+    <PackageReference Include="SenseHome.Common" Version="1.0.1" />
+  </ItemGroup>
+</Project>
