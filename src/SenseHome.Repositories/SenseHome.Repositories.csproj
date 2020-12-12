@@ -8,6 +8,6 @@
     <Folder Include="User\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SenseHome.DomainModels\SenseHome.DomainModels.csproj" />
+    <PackageReference Include="SenseHome.DomainModels" Version="1.0.0" />
   </ItemGroup>
 </Project>
