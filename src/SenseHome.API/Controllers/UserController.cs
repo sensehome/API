@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SenseHome.DataTransferObjects.User;
@@ -36,7 +35,5 @@ namespace SenseHome.API.Controllers
             var users = await userService.GetAllAsync();
             return Ok(users);
         }
-
-
     }
 }
