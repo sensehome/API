@@ -4,14 +4,19 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.IdentityModel.Tokens;
+using SenseHome.Common.Enums;
 using SenseHome.DataTransferObjects.Authentication;
+using SenseHome.Services.Configurations;
 
 namespace SenseHome.Services.UserExtension
 {
     public class UserExtensionService : IUserExtensionService
     {
-        public UserExtensionService()
+        private readonly AuthenticationConfiguration authenticationConfiguration;
+
+        public UserExtensionService(AuthenticationConfiguration authenticationConfiguration)
         {
+            this.authenticationConfiguration = authenticationConfiguration;
         }
 
         public bool CheckIfUserPasswordIsCorrect(string rawPassword, string hashedPassowrd)
@@ -22,13 +27,13 @@ namespace SenseHome.Services.UserExtension
         public TokenDto GenerateUserAccessToken(DomainModels.User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("Secret");
+            var key = Encoding.ASCII.GetBytes(authenticationConfiguration.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, "Role string")
+                    new Claim(ClaimTypes.Role, user.Type.ToIntegerString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(
@@ -40,7 +45,7 @@ namespace SenseHome.Services.UserExtension
 
         public string GetUserHashedPassword(string rawPassword)
         {
-            var salt = Encoding.ASCII.GetBytes("16 len secret");
+            var salt = Encoding.ASCII.GetBytes(authenticationConfiguration.Secret.Substring(0, 16));
             // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: rawPassword,

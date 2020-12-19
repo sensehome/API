@@ -14,7 +14,9 @@ namespace SenseHome.API.Configuration
         {
             var apiConfiguration = new SenseHomeApiConfiguration();
             configuration.GetSection(nameof(SenseHomeApiConfiguration)).Bind(apiConfiguration);
-            services.AddSingleton(apiConfiguration);
+            services.AddSingleton(apiConfiguration.AuthenticationConfiguration);
+            services.AddSingleton(apiConfiguration.InternalCredentialConfiguration);
+
             var secretInBytes = System.Text.Encoding.ASCII.GetBytes(apiConfiguration.AuthenticationConfiguration.Secret);
             services.AddAuthentication(opt =>
             {
