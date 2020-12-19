@@ -20,6 +20,7 @@ namespace SenseHome.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddJwtService();
             services.AddControllers();
             services.AddDataContext(Configuration);
             services.AddAutoMapper();
@@ -35,9 +36,12 @@ namespace SenseHome.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            
             app.UseSenseHomeExceptionHandler(env.IsDevelopment());
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseSwaggerMiddleware();
             app.UseEndpoints(endpoints =>
             {
