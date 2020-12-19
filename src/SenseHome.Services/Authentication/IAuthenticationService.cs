@@ -1,11 +1,11 @@
-﻿using SenseHome.DataTransferObjects.User;
+﻿using SenseHome.DataTransferObjects.Authentication;
 using System.Threading.Tasks;
 
 namespace SenseHome.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Task<UserDto> Authenticate(string username, string password);
+        Task<TokenDto> LoginAsync(UserLoginDto loginDto);
 
     }
 }

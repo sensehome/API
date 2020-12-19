@@ -1,36 +1,38 @@
 ﻿using AutoMapper;
 using SenseHome.Common.Exceptions;
-using SenseHome.DataTransferObjects.User;
+using SenseHome.DataTransferObjects.Authentication;
 using SenseHome.Repositories.User;
+using SenseHome.Services.UserExtension;
 using System.Threading.Tasks;
 
 namespace SenseHome.Services.Authentication
 {
-    
-        public class AuthenticationService : BaseService, IAuthenticationService
+    public class AuthenticationService : BaseService, IAuthenticationService
+    {
+        private readonly IUserRepository userRepository;
+        private readonly IUserExtensionService userExtensionService;
+
+        public AuthenticationService(
+            IUserRepository userRepository,
+            IUserExtensionService userExtensionService,
+            IMapper mapper) : base(mapper)
         {
-            private readonly IUserRepository userRepository;
+            this.userRepository = userRepository;
+            this.userExtensionService = userExtensionService;
+        }
 
-            public AuthenticationService(IMapper mapper, IUserRepository userRepository) : base(mapper)
+        public async Task<TokenDto> LoginAsync(UserLoginDto credential)
+        {
+            var user = await userRepository.GetByNameAsync(credential.Name);
+            if (user == null)
             {
-                this.userRepository = userRepository;
+                throw new UnauthorizedException("No user found with this name");
             }
-
-            public async Task<UserDto> Authenticate(string username, string password)
+            if (!userExtensionService.CheckIfUserPasswordIsCorrect(credential.Password, user.Password))
             {
-                try
-                {
-                var user = await userRepository.GetByNameAsync(username);
-                if (user.Password != password)
-                {
-                    throw new UnauthorizedException("Incorrect Password");
-                }
-                return mapper.Map<UserDto>(user);
-                }
-                catch (NotFoundException notFound)
-                {
-                    throw new UnauthorizedException(notFound.Message);
-                }
+                throw new UnauthorizedException("Incorrect password");
             }
+            return userExtensionService.GenerateUserAccessToken(user);
         }
     }
+}
