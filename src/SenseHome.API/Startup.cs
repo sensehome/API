@@ -36,7 +36,6 @@ namespace SenseHome.API
                 app.UseDeveloperExceptionPage();
             }
             app.UseSenseHomeExceptionHandler(env.IsDevelopment());
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseSwaggerMiddleware();
             app.UseEndpoints(endpoints =>
