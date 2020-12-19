@@ -13,6 +13,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Settings\" />
+    <Folder Include="Configuration\Model\" />
   </ItemGroup>
 </Project>

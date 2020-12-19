@@ -1,7 +1,6 @@
-﻿using System;
-namespace SenseHome.API.Settings
+﻿namespace SenseHome.Services.Configurations
 {
-    public class JwtSettings
+    public class AuthenticationConfiguration
     {
         public string Secret { get; set; }
         public int TokenValidityInDays { get; set; }

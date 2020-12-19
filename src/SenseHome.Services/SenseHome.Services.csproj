@@ -8,6 +8,7 @@
     <Folder Include="User\" />
     <Folder Include="Mapper\" />
     <Folder Include="UserExtension\" />
+    <Folder Include="Configurations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SenseHome.Repositories\SenseHome.Repositories.csproj" />

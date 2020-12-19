@@ -1,6 +1,6 @@
-﻿namespace SenseHome.API.Settings
+﻿namespace SenseHome.Services.Configurations
 {
-    public class InternalCredential
+    public class InternalCredentialConfiguration
     {
         public string UserName { get; set; }
         public string Password { get; set; }

@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using SenseHome.API.Settings;
+using SenseHome.API.Configuration.Model;
 using System;
-using System.Text;
+
 
 namespace SenseHome.API.Configuration
 {
@@ -12,10 +12,10 @@ namespace SenseHome.API.Configuration
     {
         public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var apiSettings = new SenseHomeApiSettings();
-            configuration.GetSection(nameof(SenseHomeApiSettings)).Bind(apiSettings);
-            services.AddSingleton(apiSettings);
-            var secretInBytes = System.Text.Encoding.ASCII.GetBytes(apiSettings.JwtSettings.Secret);
+            var apiConfiguration = new SenseHomeApiConfiguration();
+            configuration.GetSection(nameof(SenseHomeApiConfiguration)).Bind(apiConfiguration);
+            services.AddSingleton(apiConfiguration);
+            var secretInBytes = System.Text.Encoding.ASCII.GetBytes(apiConfiguration.AuthenticationConfiguration.Secret);
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
