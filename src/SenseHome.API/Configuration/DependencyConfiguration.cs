@@ -13,12 +13,5 @@ namespace SenseHome.API.Configuration
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
         }
-
-        public static void ConfigureSettings(this IServiceCollection services, IConfiguration configuration)
-        {
-            var apiSettings = new SenseHomeApiSettings();
-            configuration.GetSection(nameof(SenseHomeApiSettings)).Bind(apiSettings);
-            services.AddSingleton(apiSettings);
-        }
     }
 }

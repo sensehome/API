@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.IdentityModel.Tokens;
 using SenseHome.Common.Exceptions;
 using SenseHome.DataTransferObjects.User;
 using SenseHome.Repositories.User;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SenseHome.Services.Authentication

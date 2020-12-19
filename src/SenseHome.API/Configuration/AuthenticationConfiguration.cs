@@ -1,14 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using SenseHome.API.Settings;
+using System;
 using System.Text;
 
 namespace SenseHome.API.Configuration
 {
     public static class JwtConfiguration
     {
-        public static void AddJwtService(this IServiceCollection services)
+        public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            var apiSettings = new SenseHomeApiSettings();
+            configuration.GetSection(nameof(SenseHomeApiSettings)).Bind(apiSettings);
+            services.AddSingleton(apiSettings);
+            var secretInBytes = System.Text.Encoding.ASCII.GetBytes(apiSettings.JwtSettings.Secret);
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -18,15 +25,12 @@ namespace SenseHome.API.Configuration
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-
-                    ValidIssuer = "https://localhost:44333",
-                    ValidAudience = "https://localhost:44333",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey@345"))
-
+                    IssuerSigningKey = new SymmetricSecurityKey(secretInBytes),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
                 };
             });
         }

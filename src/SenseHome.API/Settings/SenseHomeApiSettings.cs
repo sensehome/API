@@ -2,6 +2,7 @@
 {
     public class SenseHomeApiSettings
     {
-        InternalCredential InternalCredential { get; set; }
+        public InternalCredential InternalCredential { get; set; }
+        public JwtSettings JwtSettings { get; set; }
     }
 }
