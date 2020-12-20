@@ -1,0 +1,52 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SenseHome.Common.Exceptions;
+using SenseHome.Common.Values;
+using SenseHome.DataTransferObjects.Subscription;
+using SenseHome.Services.Subscription;
+
+namespace SenseHome.API.Controllers
+{
+    [Route("api")]
+    [Authorize]
+    public class SubscriptionController : SenseHomeBaseController
+    {
+        private readonly ISubscriptionService subscriptionService;
+
+        public SubscriptionController(ISubscriptionService subscriptionService)
+        {
+            this.subscriptionService = subscriptionService;
+        }
+
+        [HttpPost("subscriptions")]
+        [Authorize(Policy = PolicyName.Admin)]
+        public async Task<ActionResult<SubscriptionDto>> CreateAsync([FromBody] SubscriptionInsertDto subscription)
+        {
+            var createdSubscription = await subscriptionService.AddSubscriptionAsync(subscription);
+            return Created($"/api/subscriptions/{createdSubscription.Id}", createdSubscription);
+        }
+
+        [HttpGet("users/{id}/subscription")]
+        public async Task<ActionResult<IEnumerable<SubscriptionDto>>> GetUserSubscriptionsAsync(string id)
+        {
+            var currentUserId = GetCurrentUserId();
+            var currentUserRole = GetCurrentUserRole();
+            if(currentUserId != id && currentUserRole != Common.Enums.UserType.Admin)
+            {
+                throw new ForbiddenException("Access Denied");
+            }
+            var subscriptions = await subscriptionService.GetUserSubscriptionsAsync(id);
+            return Ok(subscriptions);
+        }
+
+        [HttpGet("subscriptions/{id}")]
+        [Authorize(Policy = PolicyName.Admin)]
+        public async Task<ActionResult> DeleteAsync(string id)
+        {
+            await subscriptionService.DeleteSubscriptionByIdAsync(id);
+            return NoContent();
+        }
+    }
+}

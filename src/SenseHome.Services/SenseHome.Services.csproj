@@ -12,6 +12,7 @@
     <Folder Include="Profile\" />
     <Folder Include="TemperatureHumidity\" />
     <Folder Include="MotionDetection\" />
+    <Folder Include="Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SenseHome.Repositories\SenseHome.Repositories.csproj" />
