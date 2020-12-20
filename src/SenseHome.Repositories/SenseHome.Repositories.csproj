@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="User\" />
     <Folder Include="TemperatureHumidity\" />
+    <Folder Include="Profile\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SenseHome.DomainModels" Version="1.0.0" />
