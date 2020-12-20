@@ -21,6 +21,7 @@ namespace SenseHome.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddJwtAuthentication(Configuration);
+            services.AddSenseHomeAuthorization();
             services.AddControllers();
             services.AddDataContext(Configuration);
             services.AddAutoMapper();
