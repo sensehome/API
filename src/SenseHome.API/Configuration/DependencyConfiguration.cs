@@ -12,13 +12,13 @@ namespace SenseHome.API.Configuration
     {
         public static void AddDependentServicesAndRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserExtensionService, UserExtensionService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUserExtensionService, UserExtensionService>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
-            services.AddScoped<ITemperatureHumidityRepository, TemperatureHumdityRepository>();
-            services.AddScoped<ITemperatureHumidityService, TemperatureHumidityService>();
+            services.AddSingleton<ITemperatureHumidityRepository, TemperatureHumdityRepository>();
+            services.AddSingleton<ITemperatureHumidityService, TemperatureHumidityService>();
         }
     }
 }
