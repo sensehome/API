@@ -69,6 +69,12 @@ namespace SenseHome.Repositories.User
             return user;
         }
 
+        public async Task<DomainModels.User> GetByNameOrDefaultAsync(string name)
+        {
+            var cursor = await collection.FindAsync(doc => doc.Name == name);
+            return cursor.FirstOrDefault();
+        }
+
         public Task<DomainModels.User> UpdateAsync(DomainModels.User entity)
         {
             throw new System.NotImplementedException();
