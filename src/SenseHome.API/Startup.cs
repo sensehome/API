@@ -21,11 +21,13 @@ namespace SenseHome.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddJwtAuthentication(Configuration);
+            services.AddSenseHomeAuthorization();
             services.AddControllers();
             services.AddDataContext(Configuration);
             services.AddAutoMapper();
             services.AddDependentServicesAndRepositories();
             services.AddSwaggerService();
+            services.AddConfiguredCors(Configuration);
         
         }
 
@@ -40,6 +42,7 @@ namespace SenseHome.API
             app.UseSenseHomeExceptionHandler(env.IsDevelopment());
             app.UseRouting();
             app.UseAuthentication();
+            app.UseConfiguredCors();
             app.UseAuthorization();
             app.UseSwaggerMiddleware();
             app.UseEndpoints(endpoints =>
