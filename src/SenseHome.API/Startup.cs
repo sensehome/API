@@ -26,6 +26,7 @@ namespace SenseHome.API
             services.AddAutoMapper();
             services.AddDependentServicesAndRepositories();
             services.AddSwaggerService();
+            services.AddConfiguredCors(Configuration);
         
         }
 
@@ -41,6 +42,7 @@ namespace SenseHome.API
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseConfiguredCors();
             app.UseAuthorization();
             app.UseSwaggerMiddleware();
             app.UseEndpoints(endpoints =>
