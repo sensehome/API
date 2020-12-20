@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +10,7 @@ namespace SenseHome.Repositories
         Task<T> CreateAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task<bool> DeleteAsync(string id);
-        Task<IEnumerable> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync();
         IQueryable<T> GetAsQueryable();
     }
 }

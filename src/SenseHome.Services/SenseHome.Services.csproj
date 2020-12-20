@@ -9,6 +9,9 @@
     <Folder Include="Mapper\" />
     <Folder Include="UserExtension\" />
     <Folder Include="Configurations\" />
+    <Folder Include="Profile\" />
+    <Folder Include="TemperatureHumidity\" />
+    <Folder Include="MotionDetection\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SenseHome.Repositories\SenseHome.Repositories.csproj" />
