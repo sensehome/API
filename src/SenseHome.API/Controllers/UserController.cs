@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SenseHome.Common.Values;
 using SenseHome.DataTransferObjects.User;
 using SenseHome.Services.User;
 
 namespace SenseHome.API.Controllers
 {
+    [Authorize(Policy = PolicyName.Admin)]
     [Route("api/users")]
     public class UserController : SenseHomeBaseController
     {
