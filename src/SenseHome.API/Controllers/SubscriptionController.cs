@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SenseHome.Common.Exceptions;
@@ -28,8 +27,8 @@ namespace SenseHome.API.Controllers
             return Created($"/api/subscriptions/{createdSubscription.Id}", createdSubscription);
         }
 
-        [HttpGet("users/{id}/subscription")]
-        public async Task<ActionResult<IEnumerable<SubscriptionDto>>> GetUserSubscriptionsAsync(string id)
+        [HttpGet("users/{id}/subscriptions")]
+        public async Task<ActionResult<SubscriptionDto>> GetUserSubscriptionsAsync(string id)
         {
             var currentUserId = GetCurrentUserId();
             var currentUserRole = GetCurrentUserRole();
@@ -37,8 +36,8 @@ namespace SenseHome.API.Controllers
             {
                 throw new ForbiddenException("Access Denied");
             }
-            var subscriptions = await subscriptionService.GetUserSubscriptionsAsync(id);
-            return Ok(subscriptions);
+            var subscription = await subscriptionService.GetUserSubscriptionsAsync(id);
+            return Ok(subscription);
         }
 
         [HttpGet("subscriptions/{id}")]

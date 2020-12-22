@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using SenseHome.Common.Exceptions;
 using SenseHome.DataTransferObjects.Subscription;
@@ -18,6 +17,11 @@ namespace SenseHome.Services.Subscription
 
         public async Task<SubscriptionDto> AddSubscriptionAsync(SubscriptionInsertDto subscription)
         {
+            var userExistingSubscriptions = await subscriptionRepository.GetByUserIdOrDefaultAsync(subscription.UserId);
+            if(userExistingSubscriptions != null)
+            {
+                throw new BadRequestException("User already has subscription");
+            }
             var subscriptionToCreate = mapper.Map<DomainModels.Subscription>(subscription);
             var createdSubscription = await subscriptionRepository.CreateAsync(subscriptionToCreate);
             return mapper.Map<SubscriptionDto>(createdSubscription);
@@ -33,11 +37,16 @@ namespace SenseHome.Services.Subscription
             return true;
         }
 
-        public async Task<IEnumerable<SubscriptionDto>> GetUserSubscriptionsAsync(string userId)
+        public async Task<SubscriptionDto> GetUserSubscriptionsAsync(string userId)
         {
-            var subscriptions = await subscriptionRepository.GetAllByUserIdAsync(userId);
-            var subscriptionDtos = mapper.Map<IEnumerable<SubscriptionDto>>(subscriptions);
-            return subscriptionDtos;
+            var subscriptions = await subscriptionRepository.GetByUserIdAsync(userId);
+            var subscriptionDto = mapper.Map<SubscriptionDto>(subscriptions);
+            return subscriptionDto;
+        }
+
+        public Task<SubscriptionDto> UpdateSubscriptionAsync(SubscriptionDto subscription)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

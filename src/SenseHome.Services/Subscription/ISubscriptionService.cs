@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SenseHome.DataTransferObjects.Subscription;
 
 namespace SenseHome.Services.Subscription
@@ -7,7 +6,8 @@ namespace SenseHome.Services.Subscription
     public interface ISubscriptionService
     {
         Task<SubscriptionDto> AddSubscriptionAsync(SubscriptionInsertDto subscription);
+        Task<SubscriptionDto> UpdateSubscriptionAsync(SubscriptionDto subscription);
         Task<bool> DeleteSubscriptionByIdAsync(string id);
-        Task<IEnumerable<SubscriptionDto>> GetUserSubscriptionsAsync(string userId);
+        Task<SubscriptionDto> GetUserSubscriptionsAsync(string userId);
     }
 }
