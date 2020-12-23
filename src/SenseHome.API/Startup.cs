@@ -40,7 +40,6 @@ namespace SenseHome.API
             }
             
             app.UseSenseHomeExceptionHandler(env.IsDevelopment());
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
             app.UseConfiguredCors();
