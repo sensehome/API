@@ -1,6 +1,7 @@
 ﻿using SenseHome.DataTransferObjects.User;
 using SenseHome.DataTransferObjects.Profile;
 using SenseHome.DataTransferObjects.Subscription;
+using SenseHome.DataTransferObjects.TemperatureHumidity;
 
 namespace SenseHome.Services.Mapper
 {
@@ -11,6 +12,7 @@ namespace SenseHome.Services.Mapper
             CreateUserMaps();
             CreateProfileMaps();
             CreateSubscriptionMaps();
+            CreateTemperatureHumidityMaps();
         }
 
         private void CreateUserMaps()
@@ -31,6 +33,11 @@ namespace SenseHome.Services.Mapper
             CreateMap<DomainModels.Subscription, SubscriptionDto>();
             CreateMap<SubscriptionInsertDto, DomainModels.Subscription>();
 
+        }
+
+        private void CreateTemperatureHumidityMaps()
+        {
+            CreateMap<DomainModels.TemperatureHumidity, TemperatureHumidityDto>();
         }
     }
 }

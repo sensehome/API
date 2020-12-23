@@ -52,9 +52,10 @@ namespace SenseHome.Services.User
             return mapper.Map<IEnumerable<UserDto>>(users);
         }
 
-        public Task<UserDto> GetUserByIdAsync(string id)
+        public async Task<UserDto> GetUserByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = await userRepository.GetAsync(id);
+            return mapper.Map<UserDto>(user);
         }
 
         public async Task<UserDto> UpdateAsync(UserUpdateDto user)

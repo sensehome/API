@@ -9,6 +9,10 @@
     <Folder Include="Mapper\" />
     <Folder Include="UserExtension\" />
     <Folder Include="Configurations\" />
+    <Folder Include="Profile\" />
+    <Folder Include="TemperatureHumidity\" />
+    <Folder Include="MotionDetection\" />
+    <Folder Include="Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SenseHome.Repositories\SenseHome.Repositories.csproj" />
@@ -16,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
-    <PackageReference Include="SenseHome.DataTransferObjects" Version="1.0.4" />
+    <PackageReference Include="SenseHome.DataTransferObjects" Version="1.0.5" />
     <PackageReference Include="SenseHome.Common" Version="1.0.2" />
   </ItemGroup>
 </Project>

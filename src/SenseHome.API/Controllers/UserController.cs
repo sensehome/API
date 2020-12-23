@@ -8,7 +8,7 @@ using SenseHome.Services.User;
 
 namespace SenseHome.API.Controllers
 {
-    [Authorize(Policy = PolicyName.Admin)]
+    [Authorize]
     [Route("api/users")]
     public class UserController : SenseHomeBaseController
     {
@@ -19,20 +19,34 @@ namespace SenseHome.API.Controllers
             this.userService = userService;
         }
 
+
+        [HttpGet("current")]
+        public async Task<ActionResult<UserDto>> GetCurrentUserAsync()
+        {
+            var userId = GetCurrentUserId();
+            var user = await userService.GetUserByIdAsync(userId);
+            return Ok(user);
+        }
+
+
         [HttpGet("{id}")]
+        [Authorize(Policy = PolicyName.Admin)]
         public async Task<ActionResult<UserDto>> GetAsync([FromRoute] string id)
         {
-            return await userService.GetUserByIdAsync(id);
+            var user =  await userService.GetUserByIdAsync(id);
+            return Ok(user);
         }
 
         [HttpPost]
+        [Authorize(Policy = PolicyName.Admin)]
         public async Task<ActionResult<UserDto>> CreateAsync([FromBody] UserInsertDto user)
         {
             var createdUser = await userService.CreateUserAsync(user);
-            return Created("", createdUser);
+            return Created($"/api/users/${createdUser.Id}", createdUser);
         }
 
         [HttpGet]
+        [Authorize(Policy = PolicyName.Admin)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllAsync()
         {
             var users = await userService.GetAllAsync();
