@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using SenseHome.Common.Exceptions;
@@ -60,9 +61,21 @@ namespace SenseHome.Services.User
 
         public async Task<UserDto> UpdateAsync(UserUpdateDto user)
         {
-            var userToUpdate = mapper.Map<DomainModels.User>(user);
+            var userToUpdate = await userRepository.GetOrDefaultAsync(user.Id);
+            if(userToUpdate == null)
+            {
+                throw new NotFoundException("No user found with this id");
+            }
+            var existingUserWithUpdatedName = userRepository.GetAsQueryable().Where(u => u.Name == user.Name && u.Id != userToUpdate.Id);
+            if(existingUserWithUpdatedName != null)
+            {
+                throw new BadRequestException("A user already exist with this name");
+            }
+            userToUpdate.Type = user.Type;
+            userToUpdate.Name = user.Name;
             var updatedUser = await userRepository.UpdateAsync(userToUpdate);
-            return mapper.Map<UserDto>(updatedUser);
+            var userDto = mapper.Map<UserDto>(updatedUser);
+            return userDto;
         }
 
 
