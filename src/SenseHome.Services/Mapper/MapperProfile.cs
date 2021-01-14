@@ -32,6 +32,7 @@ namespace SenseHome.Services.Mapper
         {
             CreateMap<DomainModels.Subscription, SubscriptionDto>();
             CreateMap<SubscriptionInsertDto, DomainModels.Subscription>();
+            CreateMap<SubscriptionUpdateDto, DomainModels.Subscription>();
 
         }
 
