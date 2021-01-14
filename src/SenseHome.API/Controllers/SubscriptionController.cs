@@ -40,12 +40,12 @@ namespace SenseHome.API.Controllers
             return Ok(subscription);
         }
 
-        [HttpGet("subscriptions/{id}")]
+        [HttpPut("subscriptions/{id}")]
         [Authorize(Policy = PolicyName.Admin)]
-        public async Task<ActionResult> DeleteAsync(string id)
+        public async Task<ActionResult<SubscriptionDto>> UpdateAsync([FromRoute]string id, [FromBody]SubscriptionUpdateDto subscription)
         {
-            await subscriptionService.DeleteSubscriptionByIdAsync(id);
-            return NoContent();
+            var updatedSubscription = await subscriptionService.UpdateSubscriptionAsync(subscription);
+            return Ok(updatedSubscription);
         }
     }
 }

@@ -45,6 +45,18 @@ namespace SenseHome.API.Controllers
             return Created($"/api/users/${createdUser.Id}", createdUser);
         }
 
+        [HttpPut("{id}")]
+        [Authorize(Policy = PolicyName.Admin)]
+        public async Task<ActionResult<UserDto>> UpdateAsync([FromBody] UserUpdateDto user, [FromRoute] string id)
+        {
+            if(id != user.Id)
+            {
+                return BadRequest("User id didn't matched");
+            }
+            var updatedUser = await userService.UpdateAsync(user);
+            return Ok(updatedUser);
+        }
+
         [HttpGet]
         [Authorize(Policy = PolicyName.Admin)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllAsync()

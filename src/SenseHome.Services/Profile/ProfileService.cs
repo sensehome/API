@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using SenseHome.Common.Exceptions;
 using SenseHome.DataTransferObjects.Profile;
 using SenseHome.Repositories.Profile;
 
@@ -29,9 +30,16 @@ namespace SenseHome.Services.Profile
 
         public async Task<ProfileDto> UpdateProfileAsync(ProfileUpsertDto profile)
         {
-            var profileToUpdate = mapper.Map<DomainModels.Profile>(profile);
+            var profileToUpdate = await profileRepository.GetOrDefaultAsync(profile.Id);
+            if(profileToUpdate == null)
+            {
+                throw new NotFoundException("No profile found with this id");
+            }
+            profileToUpdate.ImagePath = profile.ImagePath;
+            profileToUpdate.DisplayName = profile.DisplayName;
             var updatedProfile = await profileRepository.UpdateAsync(profileToUpdate);
-            return mapper.Map<ProfileDto>(updatedProfile);
+            var profileDto =  mapper.Map<ProfileDto>(updatedProfile);
+            return profileDto;
         }
     }
 }
