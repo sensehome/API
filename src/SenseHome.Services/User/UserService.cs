@@ -66,13 +66,24 @@ namespace SenseHome.Services.User
             {
                 throw new NotFoundException("No user found with this id");
             }
+            //checking whether user is request for update the name
+            if(userToUpdate.Name != user.Name)
+            {
+                var isRequestUserNameExist = userRepository.GetAsQueryable()
+                                                           .Where(u => u.Name == user.Name)
+                                                           .Any();
+                if (isRequestUserNameExist)
+                {
+                    throw new BadRequestException("A user already exist with this username");
+                }
+            }
+            
             userToUpdate.Type = user.Type;
             userToUpdate.Name = user.Name;
+            userToUpdate.LastModifedDate = DateTime.Now;
             var updatedUser = await userRepository.UpdateAsync(userToUpdate);
             var userDto = mapper.Map<UserDto>(updatedUser);
             return userDto;
         }
-
-
     }
 }
