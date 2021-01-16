@@ -44,9 +44,17 @@ namespace SenseHome.Services.Subscription
             return subscriptionDto;
         }
 
-        public Task<SubscriptionDto> UpdateSubscriptionAsync(SubscriptionDto subscription)
+        public async Task<SubscriptionDto> UpdateSubscriptionAsync(SubscriptionUpdateDto subscription)
         {
-            throw new System.NotImplementedException();
+            var subscriptionToUpdate = await subscriptionRepository.GetOrDefaultAsync(subscription.Id);
+            if(subscriptionToUpdate == null)
+            {
+                throw new NotFoundException("No subscription found with this id");
+            }
+            subscriptionToUpdate.Path = subscription.Path;
+            var updatedSubscription= await subscriptionRepository.UpdateAsync(subscriptionToUpdate);
+            var subscriptionDto = mapper.Map<SubscriptionDto>(updatedSubscription);
+            return subscriptionDto;
         }
     }
 }
