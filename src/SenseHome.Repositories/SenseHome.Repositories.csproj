@@ -12,6 +12,7 @@
     <Folder Include="Subscription\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="SenseHome.DataTransferObjects" Version="1.0.7" />
     <PackageReference Include="SenseHome.DomainModels" Version="1.0.3" />
   </ItemGroup>
 </Project>
